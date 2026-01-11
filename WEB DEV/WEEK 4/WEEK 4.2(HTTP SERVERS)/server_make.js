@@ -21,16 +21,20 @@ app.get("/", (req, res) => {
 
   // query parameter se 'a' le rahe hain
   // req.query.n hamesha string hota hai, isliye number me convert kar rahe hain
-  let n = parseInt(req.query.a)
+  let w = parseInt(req.query.a) // parseInt String ke andar se nikal krr whole number bana deta hai 
 
   // sum function call karke result nikaal rahe hain
-  let ans = sum(n)
+  let ans = sum(w)
 
   // client (browser) ko response bhej rahe hain
   res.send("this is the answer " + ans)
 })
 
 // Server ko port 3000 par start kar rahe hain
-app.listen(3000, () => {
-  console.log("Server running on port 3000")
-})
+app.listen(
+  3000,               // argument 1 → port number
+  () => {             // argument 2 → callback function
+    console.log("Server running on port 3000")
+  }
+)
+

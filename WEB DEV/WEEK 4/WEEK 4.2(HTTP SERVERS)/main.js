@@ -1,18 +1,20 @@
-const express = require("express");
+const express = require("express")
+const server = express()
 
-function cal(n) {
-    let sum = 0;
-    for (let i = 1; i <= n; i++) {
-        sum += i;
-    }
-    return sum;
+function sum (t,q){
+   return t+q
 }
 
-const app = express();
-
-app.get("/",function(req,res){
-    const n = req.query.a;
-    const ans  = cal(n);
-    res.send(ans.toString());  
+server.get("/",(req,res)=>{
+    let parameter = parseInt(req.query.l)
+    let second_parameter = parseInt(req.query.m)
+    let ans = sum(parameter,second_parameter)
+    res.send(ans)
 })
-app.listen(3000)
+server.listen(
+    3001,
+    ()=>{
+        console.log("PORT IS RUNNING ON 3001");
+        
+    }
+)// in local host type: http://localhost:3001/?l=3&m=5
