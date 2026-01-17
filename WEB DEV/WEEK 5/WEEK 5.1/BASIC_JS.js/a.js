@@ -375,6 +375,12 @@ getalldata();// calling the function
 
 /*
 IIFE ek function hota hai jo define hote hi turant execute ho jaata hai. 
+
+SYNTAX:
+(function () {
+    console.log("Hello");
+})();
+
 */
 (async function () {
      console.log("getting data 1...");
