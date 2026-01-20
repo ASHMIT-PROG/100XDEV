@@ -48,7 +48,7 @@ function getdata(dataid, getnextdata) {
         if (getnextdata) {
             getnextdata();
         }
-    }, 4000);
+    }, 4000);   
     })
 }
 
@@ -65,6 +65,11 @@ getdata(1, () => {
 });
 
 //================================PROMISES=================================
+
+// INTERVIEW RELATED QUESTIONS : https://dev.to/hitheshkumar/master-javascript-promises-10-tricky-output-questions-every-developer-must-know-part-1-1l43
+//
+
+
 /*
 Promise ek object hota hai jo future me kisi kaam ke complete hone ka “vaada” karta hai.
 
@@ -82,37 +87,6 @@ ya fail hoga ❌
     
 
    // newdata ek function hai jo ek Promise return karta hai
-// Ye function asynchronous kaam simulate karta hai (3 sec delay)
-function newdata(dtid) {
-
-    // Promise object create ho raha hai
-    // resolve → jab kaam successfully complete ho
-    // reject  → jab kaam fail ho
-    return new Promise((resolve, reject) => {
-
-        // setTimeout ek asynchronous Web API hai
-        // Iska matlab: JS yahan wait nahi karega,
-        // ye kaam background me chala jaayega
-        setTimeout(() => {
-
-            // 3 second ke baad ye line execute hogi
-            // dtid wahi value hai jo function call ke time pass hui thi
-            console.log("data", dtid);
-
-            // resolve() call karne ka matlab:
-            // Promise ab SUCCESSFULLY complete ho gaya
-            // Aur jo value yahan pass ki hai ("success"),
-            // wahi value .then() ke andar milegi
-            resolve("success");
-
-            // NOTE:
-            // resolve ke baad promise ka state "fulfilled" ho jaata hai
-            // Iske baad na resolve dobara chalega, na reject
-
-        }, 3000); // 3000 milliseconds = 3 seconds delay
-    });
-}
-// newdata ek function hai jo ek Promise return karta hai
 // Ye function asynchronous kaam simulate karta hai (3 sec delay)
 function newdata(dtid) {
 
@@ -196,11 +170,57 @@ getpromise()
 //         console.log("error",error);
         
     // })
+// Creating a Promise object
+// Promise ke constructor me ek function hota hai
+// jisme resolve (success) aur reject (failure) milta hai
+const mypromise = new Promise((resolve, reject) => {
+
+    // Condition decide karegi promise resolve hoga ya reject
+    const success = true;
+
+    // Agar condition true hai
+    if (success) {
+        // resolve() call hone ka matlab:
+        // promise successfully complete ho gaya
+        resolve("code runs ");
+    } 
+    // Agar condition false hoti
+    else {
+        // reject() call hone ka matlab:
+        // promise fail ho gaya
+        reject("code not runs ");
+    }
+});
+
+// .then() tab execute hota hai jab promise resolve hota hai
+mypromise.then((result) => {
+
+    // Ye line confirm karti hai ki .then() chala
+    console.log(".then executed sucessfully");
+
+    // resolve() ke andar jo value pass ki thi
+    // wahi value yaha result me milti hai
+    console.log(result);
+})
+
+// .catch() tab execute hota hai jab promise reject hota hai
+.catch((error) => {
+
+    // Ye line batati hai ki koi error aaya hai
+    console.log("there is some error");
+
+    // reject() ke andar jo value pass ki thi
+    // wahi value yaha error me milti hai
+    console.log(error);
+});
+
 
     
 //================================PROMISE CHAINING=================================
 
 // ================= ASYNC FUNCTION 1 =================
+
+// https://medium.com/codex/javascript-async-await-javascript-interview-questions-10-e51629bef827
 
 // asyncfunc1 ek function hai jo Promise RETURN karta hai
 // Iska kaam: 3 sec delay ke baad "success 1" dena
@@ -357,17 +377,17 @@ async function getwetherdata(){
 
 
 // USAGE ON GET DATA FUNCTION 
-async function getalldata(){
-    console.log("getting data 1...");
-    
-    await getdata(1);
-        console.log("getting data 2...");
+    async function getalldata(){
+        console.log("getting data 1...");
+        
+        await getdata(1);
+            console.log("getting data 2...");
 
-    await getdata(2)
-        console.log("getting data 3...");
+        await getdata(2)
+            console.log("getting data 3...");
 
-    await getdata(3)
-}
+        await getdata(3)
+    }
 
 getalldata();// calling the function 
 
