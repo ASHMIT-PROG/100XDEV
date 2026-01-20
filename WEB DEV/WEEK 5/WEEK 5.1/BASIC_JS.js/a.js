@@ -391,6 +391,47 @@ async function getwetherdata(){
 
 getalldata();// calling the function 
 
+function newdata(data){
+    return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                console.log("data",data);
+                resolve("success")
+            },1000)
+            
+    })
+}
+
+async function getallldata(){
+console.log("fetching data 1....");
+let p1 = await newdata (1)
+console.log(p1);
+
+console.log("fetching data 2....");
+let p2 = await newdata (2)
+console.log(p2);
+
+console.log("fetching data 3....");
+let p3 = await newdata (3)
+console.log(p3);
+
+console.log("fetching data 4....");
+let p4 = await newdata (4)
+console.log(p4);
+
+}
+
+getallldata()
+
+/**data 1
+success
+data 2
+success
+data 3
+success
+data 4
+success
+ */
+
 //================================IIFE=================================
 
 /*
