@@ -400,7 +400,17 @@ function newdata(data){
             
     })
 }
+/*await kisi Promise ke resolve hone ka wait karta hai
+aur us Promise ki resolved value return karta hai.
 
+
+“Jab tak getdata(1) ka kaam complete na ho jaaye,
+is function ke aage ka code mat chalao.”
+
+⚠️ Sirf ye function rukta hai, poora JavaScript nahi.
+
+
+*/
 async function getallldata(){
 console.log("fetching data 1....");
 let p1 = await newdata (1)
