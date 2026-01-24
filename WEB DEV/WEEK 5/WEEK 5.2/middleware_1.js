@@ -40,7 +40,13 @@ function real_sum_handler(req, res) {
 }
 //================================GET USED FOR SUM ===================================================================
 
+// endpoints- /sum , /multiply
 // it will get the sum function 
+// so i have multiple end points and i want to use middlewares in all of them so instead of writing , request_increaser, everytime
+//i will just use app.use(request_increaser)and all the endpoints that come after it use this middleware
+
+// and app.get("/sum",real_sum_handler)
+
 app.get("/sum", request_increaser, real_sum_handler)
 
 /* FLOW OF THE GET REQUEST HERE
