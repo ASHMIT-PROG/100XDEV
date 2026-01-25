@@ -20,7 +20,8 @@
       .then(function (response) {
         // backend se jo aaya
         document.getElementById("result").innerText =
-          "Sum is: " + response.data.ans;
+          "Sum is: " + response.data.ans; //response → pura reply , data → backend ka JSON , ans → sum ka result
+          
       })
       .catch(function (error) {
         console.log(error);
