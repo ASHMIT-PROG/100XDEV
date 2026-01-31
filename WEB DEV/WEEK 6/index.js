@@ -34,6 +34,7 @@ function generateToken() {
 
         // Add a random character from the options array to the token
         token += options[Math.floor(Math.random() * options.length)];
+        // will give a random token 
     }
 
     // Return the token
