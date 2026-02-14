@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Axios library -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sum App</title>
+
+  <script>
+    function sendrequest() {
+      const a = document.getElementById("a").value;
+      const b = document.getElementById("b").value;
+
+      axios.post("http://localhost:3000/sum", {
+        a: a,
+        b: b
+      })
+      .then(function (response) {
+        // backend se jo aaya
+        document.getElementById("result").innerText =
+          "Sum is: " + response.data.ans; //response → pura reply , data → backend ka JSON , ans → sum ka result
+          
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <input id="a" type="text" placeholder="first value">
+  <input id="b" type="text" placeholder="second value">
+
+  <button onclick="sendrequest()">Find sum</button>
+
+  <h2 id="result"></h2>
+</body>
+</html>

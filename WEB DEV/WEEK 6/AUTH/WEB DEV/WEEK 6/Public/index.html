@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>AUTH WEBSITE</title>
+</head>
+
+<body>
+
+<div>
+    Signup:
+    <input id="signup-username" type="text" name="username" placeholder="Username">
+    <input id="signup-password" type="password" name="password" placeholder="Password">
+    <button onclick="signup()">Submit</button>
+</div>
+
+<div>
+    Signin:
+    <input id="signin-username" type="text" name="username" placeholder="username">
+    <input id="signin-password" type="password" name="password" placeholder="password">
+    <button onclick="signin()">Submit</button>
+</div>
+
+<div>
+    User Information:
+    <div id="information"></div>
+</div>
+
+<div>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js">// imported axios library </script>
+<script>
+
+// ====================================SIGNUP FUNCTION================================
+async function signup(){
+
+    const username = document.getElementById("signup-username").value
+    const password = document.getElementById("signup-password").value
+
+    // now i have to send the request to the backend by using axios where the backend is hosted
+    await axios.post("/signup", {
+            username:username,
+            password:password
+    })
+    alert("You are signed in")
+}
+
+
+// ====================================SIGNIN FUNCTION================================
+async function signin(){
+
+    const username = document.getElementById("signin-username").value
+    const password = document.getElementById("signin-password").value
+
+    const response = await axios.post("/signin", {
+        username: username,
+        password: password
+    })
+
+    const token = response.data.token
+
+    // token ko browser me store kar rahe hain - on this website localstorage on the browser
+    localStorage.setItem("token", token) // until u logout the token will be stored 
+
+    alert("Signed in successfully")
+    getUserInfo()
+}
+
+
+// ====================================GET USER INFO================================
+async function getUserInfo(){
+
+    const token = localStorage.getItem("token")//
+
+    if(!token){
+        return
+    }
+
+    const response = await axios.get("http://localhost:3000/me", {
+        headers: {
+            token: token
+        }
+    })
+
+    document.getElementById("information").innerText =
+        "Username: " + response.data.username
+}
+
+
+// ====================================LOGOUT FUNCTION================================
+function logout(){
+    localStorage.removeItem("token")
+    document.getElementById("information").innerText = ""
+    alert("Logged out")
+}
+
+</script>
+
+</body>
+</html>
