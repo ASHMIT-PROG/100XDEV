@@ -1,1 +1,0 @@
-//1. “Try to code a todo app and store data in an array using HTTP server”
